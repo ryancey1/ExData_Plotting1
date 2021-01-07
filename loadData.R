@@ -3,7 +3,7 @@
 # it is sourced, the script checks for the data set and downloads/extracts it if
 # necessary. Then, it subsets only the portion of the data we're interested in
 # before formatting it so dates/times can be probed for further analysis.
-#  ------------------------------------------------------------------------
+# ------------------------------------------------------------------------
 
 if(!any(.packages() == "lubridate")) {
         ## Check if lubridate is installed.

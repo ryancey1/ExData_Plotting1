@@ -3,7 +3,7 @@
 # outputs, as well as a line plot demonstrating Voltage use over two days, and a
 # line plot displaying household global minute-averaged reactive power (in
 # kilowatt) over the same two days.
-#  ------------------------------------------------------------------------
+# -------------------------------------------------------------------------
 
 # load data
 source("loadData.R")

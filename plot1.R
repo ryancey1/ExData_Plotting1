@@ -1,7 +1,7 @@
 # plot1.R -----------------------------------------------------------------
 # This R Script produces a histogram of household global minute-averaged active
 # power (in kilowatts).
-#  ------------------------------------------------------------------------
+# -------------------------------------------------------------------------
 
 # load data
 source("loadData.R")

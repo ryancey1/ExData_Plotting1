@@ -4,7 +4,7 @@
 # Sub-meter 2 corresponds to the laundry room (washing machine, tumble drier,
 # refrigerator, light).
 # Sub-meter 3 corresponds to the electric water-heater, and A/C unit.
-#  ------------------------------------------------------------------------
+# -------------------------------------------------------------------------
 
 # load data
 source("loadData.R")
