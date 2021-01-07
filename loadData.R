@@ -1,12 +1,10 @@
 if(!any(.packages() == "lubridate")) {
         ## Check if lubridate is installed.
         if (!"lubridate" %in% installed.packages()) {
-                YN <- readline(prompt = "\'lubridate\' required but not installed. Would you like to install? (Y/N): ")
-                if (any(YN == c("Y","Yes","yes","YES"))) {
-                        suppressMessages(suppressWarnings(install.packages("lubridate")))
-                        suppressPackageStartupMessages(suppressWarnings(library(lubridate, verbose = FALSE)))
-                } else stop("\'lubridate\' required to complete script. Exiting now.", call. = FALSE)
-        } 
+                suppressMessages(suppressWarnings(install.packages("lubridate")))
+                suppressPackageStartupMessages(suppressWarnings(library(lubridate, verbose = FALSE)))
+        }
+        
         ## If installed, loads lubridate.
         else {
                 suppressPackageStartupMessages(suppressWarnings(library(lubridate, verbose = FALSE)))
@@ -21,13 +19,12 @@ if (!dir.exists("data")) {
 dataset = "./data/household_power_consumption.txt"
 if (!file.exists(dataset)) {
         url = "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
-        zip = "./data/exdata_data_household_power_consumption.zip"
+        zip = "./exdata_data_household_power_consumption.zip"
         download.file(url, destfile = zip)
         unzip(zip, exdir = "./data/")
-        file.remove(zip)
-} else
-        message("Data set exists. Skipping download.")
+}
 
+## read in first few rows to gather column classes
 data <- read.table(
         dataset,
         header = TRUE,
@@ -37,7 +34,7 @@ data <- read.table(
 )
 colClasses <- sapply(data, class)
 
-## approximate nrows, specify comment char and colClasses
+## read in full table with optimized read.table call
 data <- read.table(
         dataset,
         header = TRUE,
@@ -47,12 +44,13 @@ data <- read.table(
         comment.char = "",
         colClasses = colClasses
 )
+
 data$Date <- dmy(data$Date)
 data$Time <- hms(data$Time)
 
-# 2007-02-01 and 2007-02-02
-dates <- data$Date == "2007-02-01" |
-        data$Date == "2007-02-02"
+# extract dates 2007-02-01 and 2007-02-02
+dates <- data$Date == "2007-02-01" | data$Date == "2007-02-02"
 data <- data[dates, ]
-rm(colClasses, dataset, dates
-)
+
+# clean up environment
+rm(list = ls(pattern = "[^data]"))
