@@ -45,12 +45,13 @@ data <- read.table(
         colClasses = colClasses
 )
 
-data$Date <- dmy(data$Date)
-data$Time <- hms(data$Time)
-
 # extract dates 2007-02-01 and 2007-02-02
-dates <- data$Date == "2007-02-01" | data$Date == "2007-02-02"
+dates <- data$Date == "1/2/2007" | data$Date == "2/2/2007"
 data <- data[dates, ]
+
+data$Time <- paste(data$Date, data$Time, sep=" ")
+data$Date <- dmy(data$Date)
+data$Time <- dmy_hms(data$Time)
 
 # clean up environment
 rm(list = ls(pattern = "[^data]"))
