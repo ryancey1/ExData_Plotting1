@@ -1,6 +1,15 @@
+
+# plot4.R -----------------------------------------------------------------
+
+# This R script produces a 2 x 2 plot consisting of the plot2.R and plot3.R
+# outputs, as well as a line plot demonstrating Voltage use over two days, and a
+# line plot displaying household global minute-averaged reactive power (in
+# kilowatt) over the same two days.
+
 # load data
 source("loadData.R")
 
+# initialize graphics file
 png(
         filename = "plot4.png",
         width = 480,
@@ -9,9 +18,10 @@ png(
         bg = "transparent"
 )
 
+# set parameters for layout
 par(mfrow = c(2, 2))
 
-## upper-left
+## upper-left ----------------------
 plot(
         data$Time,
         data$Global_active_power,
@@ -20,7 +30,7 @@ plot(
         ylab = "Global Active Power"
 )
 
-## upper-right
+## upper-right ----------------------
 plot(
         data$Time,
         data$Voltage,
@@ -28,7 +38,8 @@ plot(
         ylab = "Voltage",
         type = "l"
 )
-## lower-left
+
+## lower-left ----------------------
 plot(
         data$Time,
         data$Sub_metering_1,
@@ -37,20 +48,26 @@ plot(
         ylab = "Energy sub metering"
 )
 
-points(data$Time,
-       data$Sub_metering_1,
-       col = "black",
-       type = "l")
+points(
+        data$Time,
+        data$Sub_metering_1,
+        col = "black",
+        type = "l"
+)
 
-points(data$Time,
-       data$Sub_metering_2,
-       col = "red",
-       type = "l")
+points(
+        data$Time,
+        data$Sub_metering_2,
+        col = "red",
+        type = "l"
+)
 
-points(data$Time,
-       data$Sub_metering_3,
-       col = "blue",
-       type = "l")
+points(
+        data$Time,
+        data$Sub_metering_3,
+        col = "blue",
+        type = "l"
+)
 
 legend(
         "topright",
@@ -60,7 +77,7 @@ legend(
         bty = "n"
 )
 
-## lower-right
+## lower-right ----------------------
 plot(
         data$Time,
         data$Global_reactive_power,
